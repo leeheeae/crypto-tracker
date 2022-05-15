@@ -18,9 +18,13 @@ const Header = styled.header`
 const CoinList = styled.ul``;
 
 const Coin = styled.li`
-    background-color: ${props=> props.theme.textColor};
-    color: ${props => props.theme.bgColor};
+    background-color: ${props=> props.theme.bgColor};
+    color: ${props => props.theme.textColor};
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
     margin-bottom: 10px;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 500;
 
     a { 
         display: flex;
@@ -45,9 +49,9 @@ const Loader = styled.div`
     text-align: center;
 `
 const Img = styled.img`
-    width: 30px;
-    height: 30px;
-    margin-right: 8px;
+    width: 24px;
+    height: 24px;
+    margin-right: 12px;
 `
 
 //interface
@@ -84,8 +88,8 @@ const Coins = () => {
                 <CoinList>
                     {coins.map(coin => (
                         <Coin key={coin.id}>
-                            <Link to={`/${coin.id}`}>
-                                <Img src={`https://coinicons-api.vercel.app/api/icon/${coin.symbol.toLowerCase}`} alt={coin.symbol} />
+                            <Link to={`/${coin.id}`} state={{ name: coin.name, rank: coin.rank }}>
+                                <Img src={`https://cryptocurrencyliveprices.com/img/${coin.id}.png`} alt={coin.id} />
                                 {coin.name} &rarr; 
                             </Link>
                         </Coin>
