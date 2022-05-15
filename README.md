@@ -4,6 +4,11 @@
 
 `react`, `react-router-dom`, `react-query`, `styled-components`,`typescript`
 
+### 사용한 Font / color
+
+**font :** `IBM Plex Sans KR`
+**color : #FFF, #30336b, #686de0 (lightTheme)**
+
 ## 프로젝트 Router
 
 > `Router.tsx` 파일로 구분하여 구현
@@ -13,7 +18,7 @@
 
 ---
 
-### Coin Page
+### < Coin Page >
 
 #### params를 이용하여 설정하기
 
