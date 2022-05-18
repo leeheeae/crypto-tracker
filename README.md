@@ -110,3 +110,51 @@ const loading = infoLoading || tickersLoading;
 - isLoading과 data에 각 이름을 설정
 - query의 이름을 배열 형태로 저장하기 때문에 `['info', coinId]` 형태로 설정
 - loading은 각 로딩들 중 하나 이상이 로딩일 경우 loading이 뜨도록 설정
+
+## Chart
+
+- 찾고자하는 코인의 종류를 알아야함
+  - 이미 Coin 컴포넌트에서 params의 값을 갖고 있기 때문에 해당 params를 props로 넘겨주는 방법을 사용하는 것이 좋음
+- useQuery를 이용하여 data 불러오기
+
+  ```tsx
+  //Chart.tsx
+  const { isLoading, data: endData } = useQuery(['ohlcv', coinId], () =>
+    fetchCoinHistory(coinId),
+  );
+
+  //api.ts
+  export const fetchCoinHistory = (coinId: string | undefined) => {
+    const endDate = Math.floor(Date.now() / 1000);
+    const startDate = endDate - 60 * 60 * 24 * 7 * 2; //2주
+    return fetch(
+      `${BASE_URL}/coins/${coinId}/ohlcv/historical?start=${startDate}&end=${endDate}`,
+    ).then((response) => response.json());
+  };
+  ```
+
+- [https://apexcharts.com/](https://apexcharts.com/) 사용할 라이브러리
+
+```tsx
+<ApexChart
+  type="line"
+  **series={[
+    {
+      name: 'sales',
+			//data 불러오는 부분
+			//endData가 있으면 map으로 이용하고 없을 경우에 일어나는 에러는 number로 된 배열이라는 것을 알려줘야함
+      data: endData?.map((price) => price.close) as number[],
+    },
+  ]}**
+  options={{
+    chart: {
+      height: 500,
+      width: 500,
+    },
+    stroke: {
+      curve: 'smooth',
+      width: 2,
+    },
+  }}
+/>
+```
