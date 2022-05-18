@@ -42,7 +42,26 @@ const Chart = ({ coinId }: ChartProps) => {
             },
             stroke: {
               curve: 'smooth',
-              width: 2,
+              width: 3,
+            },
+            yaxis: {
+              show: false,
+            },
+            xaxis: {
+              axisBorder: { show: false },
+              axisTicks: { show: false },
+              labels: { show: false },
+              categories: endData?.map((price) => price.time_close),
+            },
+            fill: {
+              type: 'gradient',
+              gradient: { gradientToColors: ['#0be881'] },
+            },
+            colors: ['blue'],
+            tooltip: {
+              y: {
+                formatter: (value) => `$${value.toFixed(3)}`,
+              },
             },
           }}
         />
