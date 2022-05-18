@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import {
   Route,
   Routes,
@@ -139,8 +138,8 @@ interface PriceData {
 
 const Coin = () => {
   const { coinId } = useParams();
-  const loaction = useLocation();
-  const state = loaction.state as RouteState;
+  const location = useLocation();
+  const state = location.state as RouteState;
   const priceMatch = useMatch('/:coinId/price');
   const chartMatch = useMatch('/:coinId/chart');
 
